@@ -1,6 +1,7 @@
 /// Challenge 1
-/// - 1. Random String Number Generator
+// MARK: - 1. Random String Number Generator
 
+print("******* 1 *******")
 struct StringGenerator {
     
     func build(by type: String) -> String {
@@ -35,3 +36,81 @@ print(
 )
 
 print(stringGenerator.build(by: "TipoC"))
+
+// MARK: - 2. Number array sort
+print("******* 2 *******")
+struct ArrayGenerator {
+    
+    /// Method that returns a random number array by given lenght
+    func randomArray (of lenght: Int) -> [Int] {
+        var array: [Int] = []
+        
+        for _ in 0..<lenght {
+            /// The numbers in the array will be between 0 and 100
+            let number = Int.random(in: 0...100)
+            array.append(number)
+        }
+        return array
+    }
+    
+    /// Method that returns the index from the smallest number in an array
+    private func findSmallest(array: [Int]) -> Int{
+        var smallest = array[0]
+        var smallestIndex = 0
+        
+        for i in 0..<array.count {
+            if array[i] < smallest {
+             smallest = array[i]
+             smallestIndex = i
+            }
+        }
+        return smallestIndex
+    }
+    
+    /// Method used to sort a given array by an especific order
+    func sort(array: [Int], order: String) -> [Int] {
+        var newarray: [Int] = []
+        var tempArray = array
+        
+        /// Sort by given order
+        switch order {
+        case "Asc":
+            for _ in 0..<tempArray.count {
+                let smallestIndex = findSmallest(array: tempArray)
+                /// Obtain the smallest number from the array,
+                /// Remove it from the original arrray
+                /// And append it to a new array
+                newarray.append(tempArray.remove(at: smallestIndex))
+            }
+        case "Desc":
+            for _ in 0..<tempArray.count {
+                let smallestIndex = findSmallest(array: tempArray)
+                /// Obtain the smallest number from the array,
+                /// Remove it from the original arrray
+                /// And insert it to a new array at the first position
+                newarray.insert(tempArray.remove(at: smallestIndex), at: 0)
+            }
+        default:
+            print("Opción no válida")
+            break
+        }
+        return newarray
+    }
+}
+
+let example2 = ArrayGenerator()
+
+let originalArray = example2.randomArray(of: 20)
+print("El arreglo original es:",originalArray)
+
+let ascendentArray = example2.sort(array: originalArray,
+                                   order: "Asc")
+print("El arreglo ordenado en forma ascendente es:",ascendentArray)
+
+let descendentArray = example2.sort(array: originalArray,
+                                    order: "Desc")
+print("El arreglo ordenado en forma descendente es:",descendentArray)
+
+let defaultArray = example2.sort(array: originalArray,
+                                 order: "A")
+
