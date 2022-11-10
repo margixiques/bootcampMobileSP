@@ -4,9 +4,11 @@
 print("******* 1 *******")
 struct StringGenerator {
     
+    /// Method that returns a random string array by given type
     func build(by type: String) -> String {
         var result = ""
         
+        /// Set prefix for the result string by given type
         switch type {
         case "TipoA":
             result = "54"
@@ -16,7 +18,10 @@ struct StringGenerator {
             return "Opción no válida"
         }
         
+        /// The string lenght needs to have 10 characters.
+        /// So we're adding the missing 8 characters.
         for _ in 0..<8 {
+            /// The numbers added to the string will be between 0 and 9
             let number = Int.random(in: 0...9)
             result += "\(number)"
         }
@@ -42,7 +47,7 @@ print("******* 2 *******")
 struct ArrayGenerator {
     
     /// Method that returns a random number array by given lenght
-    func randomArray (of lenght: Int) -> [Int] {
+    func randomArray(of lenght: Int) -> [Int] {
         var array: [Int] = []
         
         for _ in 0..<lenght {
